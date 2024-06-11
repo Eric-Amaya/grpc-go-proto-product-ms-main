@@ -22,6 +22,9 @@ RUN rm -rf pkg/pb
 # Clonar el repositorio
 RUN git clone https://github.com/Eric-Amaya/grpc-nest-proto-order-manager-app-main.git pkg/pb/
 
+# Crear el directorio de salida para los archivos generados por protoc
+RUN mkdir -p pkg/proto
+
 # Ejecutar el comando protoc
 RUN protoc --proto_path=pkg/pb/proto --go_out=pkg/proto --go_opt=paths=source_relative --go-grpc_out=pkg/proto --go-grpc_opt=paths=source_relative pkg/pb/proto/product.proto
 
