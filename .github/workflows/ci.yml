@@ -18,8 +18,13 @@ jobs:
       - name: Build Docker image
         run: docker build -t product-service:latest .
 
-      - name: Run Tests
-        run: docker run product-service:latest go test 
+      - name: Run Go Tests with Coverage
+        run: |
+          docker run product-service:latest sh -c "
+            cd /app/pkg/services && 
+            ls && 
+            go test -cover ./...
+          " 
 
       - name: Push to Docker Hub
         uses: docker/login-action@v1
